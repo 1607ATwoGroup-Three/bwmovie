@@ -2,6 +2,8 @@ package movie.bw.com.bwmovie;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
+import android.text.Layout;
 
 import java.util.Locale;
 
@@ -21,6 +23,7 @@ public class MyAPP extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        context =this;
         AutoSize.initCompatMultiProcess(this);
         AutoSizeConfig.getInstance().setExcludeFontScale(true).setOnAdaptListener(new onAdaptListener() {
             @Override
@@ -36,7 +39,9 @@ public class MyAPP extends Application {
             public void onAdaptAfter(Object target, Activity activity) {
                 LogUtils.d(String.format(Locale.ENGLISH, "%s onAdaptAfter!", target.getClass().getName()));
             }
-        }).setUseDeviceSize(true);
+        }).setBaseOnWidth(false).setUseDeviceSize(true);
 
     }
+
+    public static Context context ;
 }
